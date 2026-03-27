@@ -20,7 +20,6 @@ import {
 } from '@carbon/react';
 import { Launch, Add } from '@carbon/icons-react';
 import { AreaChart, GaugeChart } from '@carbon/charts-react';
-import '@carbon/charts/styles.css';
 import './NetworkDashboard.scss';
 
 // --- Mock chart data ---
