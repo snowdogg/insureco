@@ -166,7 +166,7 @@ export default function NetworkDashboard() {
       {notificationOpen && (
         <div className="network-dashboard__notification">
           <InlineNotification
-            kind="error"
+            kind="warning"
             title="Title"
             subtitle="Message"
             onCloseButtonClick={() => setNotificationOpen(false)}
