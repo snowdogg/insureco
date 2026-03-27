@@ -1,6 +1,3 @@
-// Import Carbon Charts styles first so Carbon theme tokens can override them
-@import "@carbon/charts/styles.css";
-
 // Import Carbon with custom font path
 @use "@carbon/react" with (
   $font-path: "@ibm/plex"
