@@ -1,0 +1,248 @@
+@use '../styles/tokens' as *;
+
+// ── Design tokens specific to Banner ─────────────────────────────────────────
+
+:root,
+:root[data-carbon-theme="white"],
+:root[data-carbon-theme="g10"] {
+  --banner-accent-info:    #1A73EB;
+  --banner-accent-error:   #C70000;
+  --banner-accent-warning: #A3600E;
+  --banner-accent-success: #007700;
+  --banner-accent-neutral: #{$color-grey-50};
+
+  --banner-bg-info:    #EAF2FD;
+  --banner-bg-error:   #FDF0F0;
+  --banner-bg-warning: #FDF6EC;
+  --banner-bg-success: #EDF7ED;
+  --banner-bg-neutral: #{$color-grey-10};
+
+  --banner-text:          #{$color-grey-100};
+  --banner-text-secondary: #{$color-grey-70};
+  --banner-btn-border:    #{$color-grey-60};
+  --banner-btn-secondary: #1A73EB;
+  --banner-dismiss-color: #{$color-grey-60};
+  --banner-dismiss-hover: #{$color-grey-20};
+}
+
+:root[data-carbon-theme="g90"],
+:root[data-carbon-theme="g100"] {
+  --banner-accent-info:    #4589FF;
+  --banner-accent-error:   #FA4D56;
+  --banner-accent-warning: #F1C21B;
+  --banner-accent-success: #42BE65;
+  --banner-accent-neutral: #{$color-grey-40};
+
+  --banner-bg-info:    #001D6C;
+  --banner-bg-error:   #520408;
+  --banner-bg-warning: #312400;
+  --banner-bg-success: #022D0D;
+  --banner-bg-neutral: #{$color-grey-90};
+
+  --banner-text:           #{$color-grey-10};
+  --banner-text-secondary: #{$color-grey-30};
+  --banner-btn-border:     #{$color-grey-40};
+  --banner-btn-secondary:  #4589FF;
+  --banner-dismiss-color:  #{$color-grey-40};
+  --banner-dismiss-hover:  #{$color-grey-80};
+}
+
+// ── Base layout ───────────────────────────────────────────────────────────────
+
+.banner {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 40px 12px 14px; // right padding reserves space for dismiss
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--banner-text);
+  width: 100%;
+  box-sizing: border-box;
+
+  // Left accent bar
+  &__accent-bar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+    flex-shrink: 0;
+  }
+
+  // Push content away from the accent bar
+  &__icon,
+  &__content {
+    margin-left: 4px; // visual gap after accent bar
+  }
+}
+
+// ── Icon ──────────────────────────────────────────────────────────────────────
+
+.banner__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 1px; // optical vertical alignment with first text line
+}
+
+// ── Content area ──────────────────────────────────────────────────────────────
+
+.banner__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+// Inline (single-line) layout
+.banner--inline .banner__content {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+// ── Typography ────────────────────────────────────────────────────────────────
+
+.banner__heading {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--banner-text);
+}
+
+.banner__body {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--banner-text);
+}
+
+.banner__copy {
+  margin: 0;
+  flex: 1 1 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--banner-text);
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+
+.banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+// Shared button base
+.banner__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--banner-accent-info);
+    outline-offset: 2px;
+  }
+}
+
+// Primary action button (neutral / grey border)
+.banner__btn--primary {
+  background: transparent;
+  border: 1px solid var(--banner-btn-border);
+  color: var(--banner-text);
+
+  &:hover {
+    background: var(--background-hover);
+  }
+}
+
+// Secondary action button (blue text, no background)
+.banner__btn--secondary {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--banner-btn-secondary);
+  font-size: 14px;
+  line-height: 20px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ── Dismiss button ────────────────────────────────────────────────────────────
+
+.banner__dismiss {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--banner-dismiss-color);
+  transition: background-color 0.1s ease;
+
+  &:hover {
+    background: var(--banner-dismiss-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--banner-accent-info);
+    outline-offset: 2px;
+  }
+
+  svg line {
+    stroke: var(--banner-dismiss-color);
+  }
+}
+
+// ── Inline layout adjustments ─────────────────────────────────────────────────
+
+.banner--inline {
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .banner__icon {
+    margin-top: 0;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media (max-width: 640px) {
+  .banner--inline .banner__content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .banner__actions {
+    flex-wrap: wrap;
+  }
+}
