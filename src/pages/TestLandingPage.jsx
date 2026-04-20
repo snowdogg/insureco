@@ -10,7 +10,6 @@ import {
   Tile,
   AspectRatio,
   Link,
-  Text,
 } from "@carbon/react";
 import "./TestLandingPage.scss";
 
@@ -136,11 +135,11 @@ export default function TestLandingPage() {
         <Stack gap={8} align="center" className="tlp__hero-content">
           <Stack gap={5} align="center" className="tlp__hero-text">
             <h1 className="tlp__hero-title">Our latest</h1>
-            <Text className="tlp__hero-subtitle">
+            <p className="tlp__hero-subtitle">
               Explore our cutting-edge dashboard, delivering high-quality
               solutions tailored to your needs. Enhance your experience with
               top-tier features and services.
-            </Text>
+            </p>
           </Stack>
           <Stack gap={3} align="center" className="tlp__hero-form-wrapper">
             <Stack orientation="horizontal" gap={3} className="tlp__hero-form">
@@ -156,12 +155,12 @@ export default function TestLandingPage() {
                 Start now
               </Button>
             </Stack>
-            <Text className="tlp__hero-terms">
+            <p className="tlp__hero-terms">
               By clicking &ldquo;Start now&rdquo; you agree to our{" "}
               <Link href="#" className="tlp__terms-link">
                 Terms and Conditions
               </Link>
-            </Text>
+            </p>
           </Stack>
         </Stack>
 
@@ -179,12 +178,12 @@ export default function TestLandingPage() {
       {/* ── Trusted Partners ── */}
       <section className="tlp__partners">
         <Stack gap={5} align="center">
-          <Text className="tlp__partners-label">Trusted by the best companies</Text>
+          <p className="tlp__partners-label">Trusted by the best companies</p>
           <Stack orientation="horizontal" gap={8} className="tlp__partners-logos">
             {PARTNER_LOGOS.map((logo) => (
-              <Text key={logo.name} className="tlp__partner-name">
+              <span key={logo.name} className="tlp__partner-name">
                 {logo.name}
-              </Text>
+              </span>
             ))}
           </Stack>
         </Stack>
@@ -195,11 +194,11 @@ export default function TestLandingPage() {
         <Stack gap={10} align="center" className="tlp__features-stack">
           <Stack gap={4} align="center" className="tlp__features-header">
             <h2 className="tlp__section-title">Product features</h2>
-            <Text className="tlp__section-subtitle">
+            <p className="tlp__section-subtitle">
               Provide a brief overview of the key features of the product. For
               example, you could list the number of features, their types or
               benefits, and add-ons.
-            </Text>
+            </p>
           </Stack>
 
           <div className="tlp__features-dashboard">
@@ -228,7 +227,7 @@ export default function TestLandingPage() {
                     </div>
                     <Stack gap={3}>
                       <h3 className="tlp__feature-title">{feature.title}</h3>
-                      <Text className="tlp__feature-desc">{feature.description}</Text>
+                      <p className="tlp__feature-desc">{feature.description}</p>
                     </Stack>
                   </Stack>
                 </Tile>
@@ -243,11 +242,11 @@ export default function TestLandingPage() {
         <Stack gap={10} align="center" className="tlp__testimonials-stack">
           <Stack gap={4} align="center" className="tlp__testimonials-header">
             <h2 className="tlp__testimonials-title">Testimonials</h2>
-            <Text className="tlp__testimonials-subtitle">
+            <p className="tlp__testimonials-subtitle">
               See what our customers love about our products. Discover how we
               excel in efficiency, durability, and satisfaction. Join us for
               quality, innovation, and reliable support.
-            </Text>
+            </p>
           </Stack>
 
           <Grid className="tlp__testimonials-grid" fullWidth>
@@ -255,18 +254,18 @@ export default function TestLandingPage() {
               <Column key={index} sm={4} md={4} lg={5} className="tlp__testimonial-col">
                 <Tile className="tlp__testimonial-card">
                   <Stack gap={7} className="tlp__testimonial-card-stack">
-                    <Text className="tlp__testimonial-quote">{testimonial.quote}</Text>
+                    <p className="tlp__testimonial-quote">{testimonial.quote}</p>
                     <Stack orientation="horizontal" gap={4} className="tlp__testimonial-author">
                       <div className="tlp__testimonial-avatar">
                         {testimonial.initial}
                       </div>
                       <Stack gap={1} className="tlp__testimonial-info">
-                        <Text className="tlp__testimonial-name">
+                        <span className="tlp__testimonial-name">
                           {testimonial.name}
-                        </Text>
-                        <Text className="tlp__testimonial-role">
+                        </span>
+                        <span className="tlp__testimonial-role">
                           {testimonial.role}
-                        </Text>
+                        </span>
                       </Stack>
                     </Stack>
                   </Stack>
@@ -285,7 +284,7 @@ export default function TestLandingPage() {
             <Accordion>
               {FAQ_ITEMS.map((item, index) => (
                 <AccordionItem key={index} title={item.question}>
-                  <Text className="tlp__faq-answer">{item.answer}</Text>
+                  <p className="tlp__faq-answer">{item.answer}</p>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -327,12 +326,12 @@ export default function TestLandingPage() {
                 </div>
                 <Stack gap={2}>
                   <h4 className="tlp__footer-newsletter-title">Join the newsletter</h4>
-                  <Text className="tlp__footer-newsletter-desc">
+                  <p className="tlp__footer-newsletter-desc">
                     Subscribe for weekly updates. No spams ever!
-                  </Text>
+                  </p>
                 </Stack>
                 <Stack gap={2}>
-                  <Text className="tlp__footer-email-label">Email</Text>
+                  <p className="tlp__footer-email-label">Email</p>
                   <Stack orientation="horizontal" gap={3} className="tlp__footer-form">
                     <TextInput
                       id="footer-email"
@@ -378,7 +377,7 @@ export default function TestLandingPage() {
                 Terms of Service
               </Link>
             </Stack>
-            <Text className="tlp__footer-copyright">Copyright © 2025</Text>
+            <p className="tlp__footer-copyright">Copyright © 2025</p>
             <Stack orientation="horizontal" gap={3} className="tlp__footer-socials">
               <Link href="#" className="tlp__social-icon" aria-label="GitHub">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
