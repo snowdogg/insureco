@@ -1,0 +1,73 @@
+# .builder/rules/figma-imports-and-carbon-layouts.mdc
+---
+description: Figma to Code implementation rules, focusing on maximizing Carbon Layout components (Grid, Stack, Tile) and avoiding known import issues (e.g., `<Text>`).
+globs: src/pages/**/*.jsx, src/components/**/*.jsx
+alwaysApply: false
+---
+# Figma to Code: Carbon Components & Layout Rules
+
+When converting Figma designs to React code for this project, you must adhere strictly to the Carbon Design System (`@carbon/react`) and minimize custom CSS "div soup".
+
+## 1. ⚠️ CRITICAL: The `<Text>` Component Does Not Exist
+
+**DO NOT attempt to import `<Text>` from `@carbon/react`.**
+It is not exported as a stable component (only internally as `unstable_Text`).
+- **Instead:** Use standard semantic HTML elements for typography (`<p>`, `<span>`, `<h1>` through `<h6>`).
+- **Styling:** Style these standard tags using the project's global typography and color tokens (e.g., `color: var(--text-secondary);`).
+
+## 2. Maximize Carbon Layout Components (Avoid Div Soup)
+
+Instead of creating custom flexbox or grid wrappers with standard `<div>` elements and writing custom SCSS rules, use Carbon's native layout components:
+
+- **`Stack`**: Use for vertical or horizontal flex layouts with consistent, token-based gaps. (e.g., `<Stack orientation="horizontal" gap={5}>`)
+- **`Grid` & `Column`**: Use for page layouts and responsive columns instead of custom CSS grids. Take advantage of `sm`, `md`, and `lg` props for responsive breakpoints.
+- **`Tile`**: Use for cards, feature highlights, and bordered containers instead of custom `div.card` wrappers.
+- **`AspectRatio`**: Use to wrap images that need specific proportions (e.g., `<AspectRatio ratio="16x9">`) instead of custom aspect-ratio math in SCSS.
+
+### Example Refactor
+
+**❌ Bad (Div Soup & Custom CSS):**
+
+<div className="custom-flex-row">
+  <div className="custom-card">
+    <img src="..." className="custom-image" />
+    <h3 className="custom-title">Title</h3>
+    <p className="custom-desc">Description</p>
+  </div>
+</div>
+```
+
+**✅ Good (Carbon Layout Components):**
+```jsx
+<Stack orientation="horizontal" gap={6}>
+  <Tile>
+    <Stack gap={4}>
+      <AspectRatio ratio="16x9">
+        <img src="..." alt="Description" />
+      </AspectRatio>
+      <Stack gap={2}>
+        <h3>Title</h3>
+        <p>Description</p>
+      </Stack>
+    </Stack>
+  </Tile>
+</Stack>
+```
+
+## 3. Forms and Inputs
+
+Use Carbon's form components instead of native HTML inputs or other libraries:
+- Use `<TextInput>`, `<TextArea>`, `<Button>`, etc.
+- Wrap input groups and their associated submit buttons in a `<Stack orientation="horizontal" gap={3}>` for proper alignment and spacing.
+
+## 4. Theme & Token Compliance
+
+Ensure your converted design respects the project's global CSS variables and theme system.
+- Never hardcode colors (e.g., `#FFFFFF`, `rgba(0,0,0,0.5)`, or `#131929`).
+- Map Figma colors to the closest Semantic Tokens (`var(--text-primary)`, `var(--background-secondary)`, `var(--interactive-primary)`, etc.).
+- When building new sections (like dark footers or testimonials), ensure they adapt to both Light and Dark themes via `:root[data-carbon-theme="g90"] & { ... }` overrides in your SCSS.
+- See `src/pages/ThemePreviewPage.jsx` for the single source of truth on component styling and token mapping.
+
+## 5. SCSS Specificity for Overrides
+
+If you absolutely must override a Carbon component's default style to match a Figma design perfectly, ensure your SCSS selector has equal or higher specificity than Carbon's defaults (typically 3+ classes). See `.builder/rules/theme-contrast-guidelines.mdc` for the detailed CSS specificity strategy.
