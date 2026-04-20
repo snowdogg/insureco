@@ -3,8 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import SignUpConfirmationPage from "./pages/SignUpConfirmationPage";
+import SignUpComingSoon from "./pages/SignUpComingSoon";
 import DashboardHome from "./pages/DashboardHome";
 import AboutPage from "./pages/AboutPage";
 import ThemePreviewPage from "./pages/ThemePreviewPage";
@@ -20,6 +19,7 @@ import AddVehiclePage from "./pages/business/AddVehiclePage";
 import FileClaimPage from "./pages/business/FileClaimPage";
 import MakePaymentPage from "./pages/business/MakePaymentPage";
 import MapPage from "./pages/business/MapPage";
+import TestLandingPage from "./pages/TestLandingPage";
 import FinancialDashboard1 from "./pages/FinancialDashboard1";
 import FinancialDashboard2 from "./pages/FinancialDashboard2";
 import FinancialDashboard3 from "./pages/FinancialDashboard3";
@@ -30,9 +30,9 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/test-landing-page" element={<TestLandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/signup/confirmation" element={<SignUpConfirmationPage />} />
+        <Route path="/signup" element={<SignUpComingSoon />} />
         <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="/financial-dashboards" element={<FinancialDashboardOptions />} />
         <Route path="/financial-dashboard-1" element={<FinancialDashboard1 />} />
