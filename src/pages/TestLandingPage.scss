@@ -36,20 +36,13 @@
   // ============================================
   &__hero {
     @extend %section-padding;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
     padding-bottom: 0;
   }
 
   &__hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
     width: 100%;
     max-width: 680px;
+    margin: 0 auto;
     text-align: center;
   }
 
@@ -69,16 +62,18 @@
     margin: 0;
   }
 
+  &__hero-form-wrapper {
+    width: 100%;
+  }
+
   &__hero-form {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
     width: 100%;
     max-width: 460px;
+    align-items: flex-end;
 
     @media (max-width: 480px) {
-      flex-direction: column;
-      align-items: stretch;
+      flex-direction: column !important;
+      align-items: stretch !important;
     }
   }
 
@@ -119,10 +114,12 @@
 
   &__hero-image {
     width: 100%;
+    height: 100%;
     border-radius: 8px;
     border: 1px solid var(--border-subtle);
     box-shadow: 0 0 12px 0 rgba(191, 200, 217, 0.2);
     display: block;
+    object-fit: cover;
   }
 
   // ============================================
@@ -131,10 +128,6 @@
   &__partners {
     background: #f5feff;
     padding: 32px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
 
     @media (max-width: 672px) {
       padding: 24px 16px;
@@ -150,14 +143,11 @@
   }
 
   &__partners-logos {
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap !important;
     justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
 
     @media (max-width: 672px) {
-      gap: 24px;
+      gap: 24px !important;
     }
   }
 
@@ -175,17 +165,10 @@
   // ============================================
   &__features {
     @extend %section-padding;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 48px;
   }
 
   &__features-header {
     @extend %centered-text;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 
   &__section-title {
@@ -212,32 +195,31 @@
     overflow: hidden;
     border: 1px solid var(--border-subtle);
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+    margin: 0 auto;
   }
 
   &__features-dashboard-img {
     width: 100%;
+    height: 100%;
     display: block;
+    object-fit: cover;
   }
 
   &__feature-tiles {
     width: 100%;
+  }
 
-    .cds--grid {
-      padding: 0;
-    }
+  &__feature-col {
+    margin-bottom: 24px; // Spacing for grid wrap
   }
 
   &__feature-tile {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 0;
     height: 100%;
+    padding: 16px; // Adjusting Carbon default tile padding if necessary
   }
 
   &__feature-img-wrapper {
     width: 100%;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 4px;
   }
@@ -269,17 +251,10 @@
   &__testimonials {
     @extend %section-padding;
     background: #131929;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 48px;
   }
 
   &__testimonials-header {
     @extend %centered-text;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
 
   &__testimonials-title {
@@ -299,28 +274,20 @@
   }
 
   &__testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
     width: 100%;
     max-width: 1152px;
+  }
 
-    @media (max-width: 1056px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 672px) {
-      grid-template-columns: 1fr;
-    }
+  &__testimonial-col {
+    margin-bottom: 16px;
   }
 
   &__testimonial-card {
+    height: 100%;
     background: #202837;
     border-radius: 8px;
+    border: none;
     padding: 18px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
 
   &__testimonial-quote {
@@ -332,9 +299,7 @@
   }
 
   &__testimonial-author {
-    display: flex;
     align-items: flex-start;
-    gap: 12px;
   }
 
   &__testimonial-avatar {
@@ -349,12 +314,6 @@
     font-size: 1.125rem;
     font-weight: 500;
     color: #252525;
-  }
-
-  &__testimonial-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
   }
 
   &__testimonial-name {
@@ -376,10 +335,6 @@
   // ============================================
   &__faq {
     @extend %section-padding;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
   }
 
   &__faq-title {
@@ -433,24 +388,12 @@
   }
 
   &__footer-inner {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px 64px;
     padding-bottom: 64px;
-
-    @media (max-width: 1056px) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media (max-width: 672px) {
-      grid-template-columns: 1fr;
-    }
   }
 
-  &__footer-newsletter {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  &__footer-newsletter-col,
+  &__footer-links-col {
+    margin-bottom: 40px; // For stacking when wrapping
   }
 
   &__footer-logo {
@@ -478,13 +421,11 @@
   }
 
   &__footer-form {
-    display: flex;
     align-items: flex-end;
-    gap: 8px;
 
     @media (max-width: 480px) {
-      flex-direction: column;
-      align-items: stretch;
+      flex-direction: column !important;
+      align-items: stretch !important;
     }
   }
 
@@ -501,12 +442,6 @@
     flex-shrink: 0;
   }
 
-  &__footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   &__footer-links-title {
     font-size: 0.875rem;
     font-weight: 500;
@@ -518,9 +453,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
   }
 
   &__footer-link {
@@ -539,23 +471,18 @@
   &__footer-bottom {
     border-top: 1px solid #dadee7;
     padding: 20px 0;
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: wrap !important;
 
     @media (max-width: 672px) {
-      flex-direction: column;
-      align-items: center;
+      flex-direction: column !important;
       text-align: center;
     }
   }
 
   &__footer-legal {
-    display: flex;
     align-items: center;
-    gap: 8px;
   }
 
   &__footer-legal-link {
@@ -581,9 +508,7 @@
   }
 
   &__footer-socials {
-    display: flex;
     align-items: center;
-    gap: 8px;
   }
 
   &__social-icon {
