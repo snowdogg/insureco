@@ -17,6 +17,7 @@
   background: #fff;
   min-height: 100vh;
   color: var(--tl-heading-color);
+  overflow-x: hidden; // prevent horizontal scroll from Grid if any
 }
 
 // ─────────────────────────────────────────────
@@ -57,11 +58,6 @@
   text-align: center;
 }
 
-.tl-hero__inner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 .tl-hero__heading {
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 700;
@@ -89,7 +85,6 @@
   .tl-hero__email-input {
     width: 220px;
 
-    // override Carbon's label spacing since labelText is empty
     .cds--text-input-wrapper {
       width: 100%;
     }
@@ -139,7 +134,6 @@
   border: 1px solid var(--tl-border-color);
   overflow: hidden;
   box-shadow: 0 0 12px 0 rgba(191, 200, 217, 0.2);
-  max-width: 1152px;
   margin: 0 auto;
 }
 
@@ -215,7 +209,6 @@
   border: 1px solid var(--tl-border-color);
   overflow: hidden;
   box-shadow: 0 0 12px 0 rgba(191, 200, 217, 0.2);
-  max-width: 960px;
   margin: 0 auto 3rem;
 }
 
@@ -225,18 +218,26 @@
   display: block;
 }
 
-.tl-features__cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1152px;
-  margin: 0 auto;
-  text-align: left;
+.tl-features__col-card {
+  margin-bottom: 2rem;
 }
 
 .tl-feature-card {
   display: flex;
   flex-direction: column;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  min-height: 100%;
+
+  // Overriding tile default hover since it's just meant as a container here,
+  // or we can keep it if we want tile styling. 
+  // If we don't want Carbon tile styles, we'll reset them:
+  border: none;
+  &:hover {
+    background: transparent;
+  }
 }
 
 .tl-feature-card__image-wrapper {
@@ -259,6 +260,7 @@
   font-weight: 600;
   color: var(--tl-heading-color);
   margin: 0 0 0.5rem;
+  text-align: left;
 }
 
 .tl-feature-card__desc {
@@ -266,6 +268,7 @@
   line-height: 1.6;
   color: var(--tl-body-color);
   margin: 0;
+  text-align: left;
 }
 
 // ─────────────────────────────────────────────
@@ -281,12 +284,8 @@
   margin-bottom: 2.5rem;
 }
 
-.tl-testimonials__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 1152px;
-  margin: 0 auto;
+.tl-testimonials__col-card {
+  margin-bottom: 1.5rem;
 }
 
 .tl-testimonial-card {
@@ -298,6 +297,12 @@
   flex-direction: column;
   gap: 1.5rem;
   overflow: hidden;
+  min-height: 100%;
+
+  // Overrides for carbon tile
+  &:hover {
+    background: #202837;
+  }
 }
 
 .tl-testimonial-card__text {
@@ -365,9 +370,8 @@
 }
 
 .tl-faq__list {
-  max-width: 1080px;
-  margin: 2rem auto 0;
   text-align: left;
+  margin-top: 2rem;
 
   // Override Carbon accordion to match design's box-shadow style
   .cds--accordion {
@@ -408,25 +412,19 @@
 // ─────────────────────────────────────────────
 .tl-footer {
   background: var(--tl-footer-bg);
-  padding: 4rem 1.5rem 0;
+  padding: 4rem 0 0;
   border-top: 1px solid var(--tl-border-color);
 }
 
 .tl-footer__main {
-  display: flex;
-  justify-content: space-between;
-  gap: 4rem;
-  max-width: 1152px;
-  margin: 0 auto 3rem;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
 .tl-footer__brand {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  min-width: 240px;
-  max-width: 300px;
+  margin-bottom: 2rem;
 }
 
 .tl-footer__logo {
@@ -489,14 +487,16 @@
 
 .tl-footer__links {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .tl-footer__link-col {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  min-width: 120px;
 }
 
 .tl-footer__link-heading {
@@ -528,15 +528,8 @@
 }
 
 .tl-footer__bottom {
-  max-width: 1152px;
-  margin: 0 auto;
   padding: 1.5rem 0 1.5rem;
   border-top: 1px solid var(--tl-border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .tl-footer__bottom-left {
@@ -544,6 +537,7 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .tl-footer__bottom-link {
@@ -570,6 +564,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: flex-start;
 }
 
 .tl-footer__social-link {
@@ -597,13 +592,15 @@
 // ─────────────────────────────────────────────
 // Responsive
 // ─────────────────────────────────────────────
-@media (max-width: 1055px) {
-  .tl-features__cards {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 672px) {
+  .tl-footer__social {
+    justify-content: flex-end;
   }
-
-  .tl-testimonials__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .tl-footer__bottom-left {
+    margin-bottom: 0;
+  }
+  .tl-footer__links {
+    gap: 4rem;
   }
 }
 
@@ -625,38 +622,12 @@
     padding: 2.5rem 1rem;
   }
 
-  .tl-features__cards {
-    grid-template-columns: 1fr;
-  }
-
   .tl-testimonials {
     padding: 2.5rem 1rem;
   }
 
-  .tl-testimonials__grid {
-    grid-template-columns: 1fr;
-  }
-
   .tl-partners__logos {
     gap: 1.5rem;
-  }
-
-  .tl-footer__main {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .tl-footer__brand {
-    max-width: 100%;
-  }
-
-  .tl-footer__links {
-    gap: 2rem;
-  }
-
-  .tl-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .tl-faq {
