@@ -3,6 +3,7 @@
 .landing-page {
   min-height: 100vh;
   background: var(--background-primary);
+  filter: grayscale(100%);
 }
 
 // Hero Section
@@ -39,7 +40,8 @@
   }
 
   .hero-heading {
-    font-size: var(--heading-h1-size);
+    font-size: 76px !important;
+    font-family: #e0e0e0, sans-serif !important;
     font-weight: var(--heading-h1-weight);
     line-height: var(--heading-h1-line-height);
     margin-bottom: var(--spacing-05);
